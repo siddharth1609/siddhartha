@@ -1,4 +1,4 @@
-package com.siddhartha.s.domain;
+package com.siddhartha.s.entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import javax.persistence.Id;
 
 @Entity(name = "TBL_LOGIN")
 // @Data
-public class LoginDTO {
+public class LoginEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

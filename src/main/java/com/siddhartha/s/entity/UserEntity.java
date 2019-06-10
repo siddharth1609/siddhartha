@@ -1,6 +1,6 @@
-package com.siddhartha.s.domain;
+package com.siddhartha.s.entity;
 
-import java.util.Set;
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
@@ -26,7 +23,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "USERS")
-public class User {
+public class UserEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
@@ -45,23 +42,43 @@ public class User {
 	@Column(name = "MOBILENO")
 	private int mobileNo;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private AddressEntity addressEntity;
+
 	/*
 	 * @OneToMany(cascade=CascadeType.ALL)
 	 * 
 	 * @Column(name ="ADDRESS") private Address Adress;
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
 	 */
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	// @JoinTable(joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns =
-	// @JoinColumn(name = "ADDRESS_ID"))
-	// List<Address> addressList = new ArrayList<Address>();
-	private Address addressObj;
-
-	@Column(name = "ACTIVE")
-	private int Active;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> Roles;
+	/*
+	 * @OneToOne(cascade = CascadeType.ALL)
+	 * 
+	 * @PrimaryKeyJoinColumn // @JoinTable(joinColumns = @JoinColumn(name =
+	 * "USER_ID"), inverseJoinColumns = // @JoinColumn(name = "ADDRESS_ID")) //
+	 * List<Address> addressList = new ArrayList<Address>(); private Address
+	 * addressObj;
+	 * 
+	 * @Column(name = "ACTIVE") private int Active;
+	 * 
+	 * @ManyToMany(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "users_id"),
+	 * inverseJoinColumns = @JoinColumn(name = "role_id")) private Set<Role> Roles;
+	 */
 }

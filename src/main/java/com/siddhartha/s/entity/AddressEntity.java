@@ -1,4 +1,4 @@
-package com.siddhartha.s.domain;
+package com.siddhartha.s.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,7 +20,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "ADDRESS")
-public class Address {
+public class AddressEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
@@ -45,7 +45,6 @@ public class Address {
 	@Column(name = "USER_ID")
 	private long user_id;
 
-	@OneToOne(mappedBy = "addressObj", cascade = CascadeType.ALL)
-	private User user;
-
+	@OneToOne(mappedBy = "addressEntity", cascade = CascadeType.ALL)
+	private UserEntity userEntity;
 }

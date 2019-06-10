@@ -1,4 +1,4 @@
-package com.siddhartha.s.domain;
+package com.siddhartha.s.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="ROLE")
-public class Role {
+public class RoleEntity {
 	
 	@Id
 	@GeneratedValue(strategy =GenerationType.AUTO)
