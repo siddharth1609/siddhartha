@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.siddhartha.s.domain.User;
+import com.siddhartha.s.entity.UserEntity;
 import com.siddhartha.s.service.LoginServiceImppl;
 
 @RestController
@@ -27,7 +27,7 @@ public class LoginController {
 	// User-------------------------------------------
 
 	//@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody User login, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> createUser(@RequestBody UserEntity login, UriComponentsBuilder ucBuilder) {
 		// logger.info("Creating User : {}", login);
 
 		// if (loginService.isUserExist(login)) {
@@ -45,7 +45,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/findalluser", method = RequestMethod.GET)
-	public List<User> retriveAllUser() {
+	public List<UserEntity> retriveAllUser() {
 
 		return loginServiceImppl.findAll();
 	}

@@ -1,14 +1,14 @@
 package com.siddhartha.s.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.siddhartha.s.domain.User;
+import com.siddhartha.s.entity.UserEntity;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+//@Repository("userRepository")
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-@Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Long> {
-	
-	User findUserByEmail(String email);
+	UserEntity findUserByEmail(String email);
 
 }

@@ -3,11 +3,11 @@ package com.siddhartha.s.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.siddhartha.s.domain.Role;
+import com.siddhartha.s.entity.RoleEntity;
 
 @Repository("roleRepository")
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
 	
-	Role findByRole(String role);
+	RoleEntity findByRole(String role);
 
 }
