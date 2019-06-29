@@ -60,3 +60,6 @@ dependencies {
 	
 }
 apply plugin: "net.ltgt.apt"
+sourceSets {
+    main.java.srcDirs += "build/generated/source/apt/main"
+}

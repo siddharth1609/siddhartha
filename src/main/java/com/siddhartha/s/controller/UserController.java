@@ -25,11 +25,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/user")
+	@PostMapping("/createUser")
 	public ResponseEntity<UserEntity> createUser(@RequestBody UserModel user, UriComponentsBuilder ucBuilder) {
 		UserEntity u = new UserEntity();
 		// u = userService.findUserByEmail(user.getEmail());
-		// u = userService.saveUser(user);
+		u = userService.saveNewUser(user);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/api/user}").buildAndExpand().toUri());
@@ -60,8 +60,8 @@ public class UserController {
 	public List<UserModel> getUserList() {
 
 		List<UserModel> userList = new ArrayList();
-		userList = userService.getList();
-		return userList;
+
+		return userService.getList();
 
 	}
 

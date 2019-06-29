@@ -2,6 +2,7 @@ package com.siddhartha.s.service;
 
 import java.util.List;
 
+import com.siddhartha.s.entity.UserEntity;
 import com.siddhartha.s.model.UserModel;
 
 public interface UserService {
@@ -15,5 +16,7 @@ public interface UserService {
 	 */
 
 	List<UserModel> getList();
+
+	UserEntity saveNewUser(UserModel user);
 
 }
