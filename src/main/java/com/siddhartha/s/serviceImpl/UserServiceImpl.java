@@ -3,12 +3,13 @@ package com.siddhartha.s.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.siddhartha.s.entity.AddressEntity;
 import com.siddhartha.s.entity.UserEntity;
 import com.siddhartha.s.model.AddressModel;
 import com.siddhartha.s.model.UserModel;
@@ -20,9 +21,11 @@ import com.siddhartha.s.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
+	// @Qualifier("userRepository")
 	private UserRepository userRepository;
 
 	@Autowired
+	@Qualifier("sessionFactory")
 	public SessionFactory sessionFactory;
 
 	/*
@@ -45,7 +48,9 @@ public class UserServiceImpl implements UserService {
 	public List<UserModel> getList() {
 
 		List<UserModel> userList = new ArrayList<UserModel>();
-		List<UserEntity> userEntityList = userRepository.findAll();
+		// List<UserEntity> userEntityList = userRepository.findAll();
+
+		List<UserEntity> userEntityList = new ArrayList<>();
 
 		for (UserEntity userEntity : userEntityList) {
 
@@ -79,17 +84,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity saveNewUser(UserModel user) {
 
-		Session session = this.sessionFactory.getCurrentSession();
-		session.beginTransaction();
-		// UserEntity userEntity = UserMapper.INSTANCE.userModelTouserEntity(user);
-		// userEntity(user);
-
-		UserEntity entity = userRepository.save(userEntity(user));
-
-		session.save(entity);
-		System.out.println("Sesstion:" + entity);
-		session.getTransaction().commit();
-		return entity;
+		UserEntity entity = userEntity(user);
+		return userRepository.save(entity);
 	}
 
 	private UserEntity userEntity(UserModel user) {
@@ -101,8 +97,23 @@ public class UserServiceImpl implements UserService {
 		entity.setEmail(user.getEmail());
 		entity.setMobileNo(user.getMobileNo());
 		entity.setUser_id(user.getUser_id());
+		if (user.getAddressModel() != null) {
+			entity.setAddressEntity(convertAddress((user.getAddressModel())));
+		}
 
 		return entity;
+	}
+
+	private AddressEntity convertAddress(AddressModel addressModel) {
+
+		AddressEntity am = new AddressEntity();
+		am.setCity(addressModel.getCity());
+		am.setAddress_id(addressModel.getAddress_id());
+		am.setCountry(addressModel.getCountry());
+		am.setPinCode(addressModel.getPinCode());
+		am.setState(addressModel.getState());
+		am.setStreet(addressModel.getStreet());
+		return am;
 	}
 
 }
