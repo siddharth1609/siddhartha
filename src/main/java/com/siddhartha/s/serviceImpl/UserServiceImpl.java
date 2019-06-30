@@ -3,6 +3,7 @@ package com.siddhartha.s.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,9 +50,10 @@ public class UserServiceImpl implements UserService {
 
 		List<UserModel> userList = new ArrayList<UserModel>();
 		// List<UserEntity> userEntityList = userRepository.findAll();
-
+		Session session = this.sessionFactory.getCurrentSession();
+		// session.beginTransaction();
 		List<UserEntity> userEntityList = new ArrayList<>();
-
+		userEntityList = userRepository.findAll();
 		for (UserEntity userEntity : userEntityList) {
 
 			UserModel userModel = new UserModel();
@@ -64,18 +66,21 @@ public class UserServiceImpl implements UserService {
 			userModel.setUser_id(userEntity.getUser_id());
 
 			AddressModel addressModel = new AddressModel();
-			if (userEntity.getAddressEntity() != null) {
-				addressModel.setCity(userEntity.getAddressEntity().getCity());
-
-				userModel.setAddressModel(addressModel);
-
-			}
-
+			/*
+			 * if (userEntity.getAddressEntity() != null) {
+			 * addressModel.setCity(userEntity.getAddressEntity().getCity());
+			 * 
+			 * userModel.setAddressModel(addressModel);
+			 * 
+			 * }
+			 */
 //			userModel.setAddressModel(UserMapper.INSTANCE.userEntityToUserModel(userEntity.getAddressEntity()));
 
 			/// UserModel userModel = UserMapper.INSTANCE.userEntityToUserModel(userEntity);
 
 			userList.add(userModel);
+			session.save(userList);
+			session.getTransaction().commit();
 		}
 
 		return userList;
@@ -97,9 +102,10 @@ public class UserServiceImpl implements UserService {
 		entity.setEmail(user.getEmail());
 		entity.setMobileNo(user.getMobileNo());
 		entity.setUser_id(user.getUser_id());
-		if (user.getAddressModel() != null) {
-			entity.setAddressEntity(convertAddress((user.getAddressModel())));
-		}
+		/*
+		 * if (user.getAddressModel() != null) {
+		 * entity.setAddressEntity(convertAddress((user.getAddressModel()))); }
+		 */
 
 		return entity;
 	}
