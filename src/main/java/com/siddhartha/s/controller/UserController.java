@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.siddhartha.s.entity.UserEntity;
 import com.siddhartha.s.model.UserModel;
 import com.siddhartha.s.service.UserService;
+import com.siddhartha.s.utils.SiddharthException;
 
 @RestController
 @RequestMapping("/api")
@@ -28,8 +29,12 @@ public class UserController {
 	@PostMapping("/createUser")
 	public ResponseEntity<UserEntity> createUser(@RequestBody UserModel user, UriComponentsBuilder ucBuilder) {
 		UserEntity u = new UserEntity();
-		// u = userService.findUserByEmail(user.getEmail());
-		u = userService.saveNewUser(user);
+		try {
+			u = userService.saveNewUser(user);
+
+		} catch (Exception e) {
+			throw new SiddharthException(e.getMessage());
+		}
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/api/user}").buildAndExpand().toUri());
@@ -60,6 +65,10 @@ public class UserController {
 	public List<UserModel> getUserList() {
 
 		List<UserModel> userList = new ArrayList();
+		/*
+		 * try { userList = userService.getList(); } catch (Exception e) { throw new
+		 * SiddharthException(e.getMessage()); } return userList;
+		 */
 
 		return userService.getList();
 
