@@ -2,29 +2,26 @@ package com.siddhartha.s.constant;
 
 public class Constant {
 
-	
 	/*
-	 * Mathematical Constant
+	 * Math Constant
 	 */
-	private String ADD ="+";
-	private String DIV ="/";
-	private String MUL ="*";
-	private String SUB ="-";
-	
-	
+	private String ADD = "+";
+	private String DIV = "/";
+	private String MUL = "*";
+	private String SUB = "-";
+
 	/*
-	 User Role Constant
+	 * User Role Constant
 	 */
-	
-	private String ADMIN ="admin";
-	private String USER ="user";
-	
-	
+
+	private String ADMIN = "admin";
+	private String USER = "user";
+
 	/*
-	 Error/Success Message*/
-	
-	private String SUCCESS ="Success";
-	private String ERROR ="Error";
-	
-	
+	 * Failure/Success Message
+	 */
+
+	private String SUCCESS = "Success";
+	private String ERROR = "Error";
+
 }

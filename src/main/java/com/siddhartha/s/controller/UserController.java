@@ -1,6 +1,5 @@
 package com.siddhartha.s.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,70 +7,49 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
+import com.siddhartha.s.config.SiddharthException;
 import com.siddhartha.s.entity.UserEntity;
-import com.siddhartha.s.model.UserModel;
 import com.siddhartha.s.service.UserService;
-import com.siddhartha.s.utils.SiddharthException;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
 
 	@Autowired
-	private UserService userService;
+	UserService userService;
 
-	@PostMapping("/createUser")
-	public ResponseEntity<UserEntity> createUser(@RequestBody UserModel user, UriComponentsBuilder ucBuilder) {
-		UserEntity u = new UserEntity();
-		try {
-			u = userService.saveNewUser(user);
-
-		} catch (Exception e) {
-			throw new SiddharthException(e.getMessage());
-		}
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/api/user}").buildAndExpand().toUri());
-		return new ResponseEntity<UserEntity>(u, headers, HttpStatus.CREATED);
+	@PostMapping("/createOrUpdateEmployee")
+	public ResponseEntity<UserEntity> createOrUpdateEmployee(@RequestBody UserEntity employee)
+			throws SiddharthException {
+		UserEntity updated = userService.createOrUpdateEmployee(employee);
+		return new ResponseEntity<UserEntity>(updated, new HttpHeaders(), HttpStatus.OK);
 	}
 
-	/*
-	 * @GetMapping("/userById/{id}") public ResponseEntity<List<User>>
-	 * getListOfUser(@PathVariable("id") long id, UriComponentsBuilder ucBuilder) {
-	 * // User u = new User(); // u = userService.findUserByEmail(id); // u =
-	 * userService.saveUser(user); List<User> l = new ArrayList<>(); l =
-	 * userService.listOfUser(id); HttpHeaders headers = new HttpHeaders();
-	 * headers.setLocation(ucBuilder.path("/api/user}").buildAndExpand().toUri());
-	 * return new ResponseEntity<List<User>>(l, HttpStatus.CREATED); }
-	 */
+	@GetMapping("getEmployeeById/{id}")
+	public ResponseEntity<UserEntity> getEmployeeById(@PathVariable("id") Long id) throws SiddharthException {
+		UserEntity user = userService.getEmployeeById(id);
 
-	/*
-	 * @GetMapping("/userById/{id}") public ResponseEntity<List<User>>
-	 * getListOfUser(@PathVariable("id") long id, UriComponentsBuilder ucBuilder) {
-	 * // User u = new User(); // u = userService.findUserByEmail(id); // u =
-	 * userService.saveUser(user); List<User> l = new ArrayList<User>(); l =
-	 * userService.listOfUser(id); // HttpHeaders headers = new HttpHeaders(); //
-	 * headers.setLocation(ucBuilder.path("/api/user}").buildAndExpand().toUri());
-	 * return new ResponseEntity<>(l, HttpStatus.CREATED); }
-	 */
+		return new ResponseEntity<UserEntity>(user, new HttpHeaders(), HttpStatus.OK);
+	}
 
-	@GetMapping("/userById")
-	public List<UserModel> getUserList() {
+	@GetMapping("getEmployeeByEmailId/{email}")
+	public ResponseEntity<UserEntity> getEmployeeByEmailId(@PathVariable("email") String emailId)
+			throws SiddharthException {
+		UserEntity user = userService.getEmployeeByEmailId(emailId);
+		return new ResponseEntity<UserEntity>(user, new HttpHeaders(), HttpStatus.OK);
+	}
 
-		List<UserModel> userList = new ArrayList();
-		/*
-		 * try { userList = userService.getList(); } catch (Exception e) { throw new
-		 * SiddharthException(e.getMessage()); } return userList;
-		 */
+	@GetMapping("/getAllEmployee")
+	public ResponseEntity<List<UserEntity>> getAllEmployees() {
+		List<UserEntity> list = userService.getALlEmployee();
 
-		return userService.getList();
-
+		return new ResponseEntity<List<UserEntity>>(list, new HttpHeaders(), HttpStatus.OK);
 	}
 
 	@GetMapping("/up")

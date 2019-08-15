@@ -1,4 +1,4 @@
-package com.siddhartha.s.utils;
+package com.siddhartha.s.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

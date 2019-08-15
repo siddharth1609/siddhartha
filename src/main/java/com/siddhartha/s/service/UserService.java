@@ -2,21 +2,17 @@ package com.siddhartha.s.service;
 
 import java.util.List;
 
+import com.siddhartha.s.config.SiddharthException;
 import com.siddhartha.s.entity.UserEntity;
-import com.siddhartha.s.model.UserModel;
 
 public interface UserService {
 
-	// UserEntity findUserByEmail(String email);
+	public UserEntity getEmployeeById(Long id) throws SiddharthException;
 
-	/*
-	 * public UserModel saveUser(UserModel user);
-	 * 
-	 * List<UserModel> listOfUser(Long id);
-	 */
+	public UserEntity getEmployeeByEmailId(String emailId) throws SiddharthException;
 
-	List<UserModel> getList();
+	public UserEntity createOrUpdateEmployee(UserEntity employee);
 
-	UserEntity saveNewUser(UserModel user);
+	public List<UserEntity> getALlEmployee() throws SiddharthException;
 
 }

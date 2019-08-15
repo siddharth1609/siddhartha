@@ -1,4 +1,4 @@
-package com.siddhartha.s.utils;
+package com.siddhartha.s.config;
 
 import java.sql.Date;
 
