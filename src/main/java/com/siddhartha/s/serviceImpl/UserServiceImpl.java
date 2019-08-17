@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.siddhartha.s.config.SiddharthException;
+import com.siddhartha.s.constant.Constant;
 import com.siddhartha.s.entity.UserEntity;
 import com.siddhartha.s.repository.UserRepository;
 import com.siddhartha.s.service.UserService;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
 			return user.get();
 
 		} else {
-			throw new SiddharthException("user not found");
+			throw new SiddharthException(Constant.USER_NOT_FOUND);
 		}
 
 	}
@@ -64,16 +65,31 @@ public class UserServiceImpl implements UserService {
 			return user;
 
 		} else {
-			throw new SiddharthException("user not found");
+			throw new SiddharthException(Constant.USER_NOT_FOUND);
 		}
 	}
 
 	@Override
 	public List<UserEntity> getALlEmployee() {
 
-		List<UserEntity> listOfEmpleyee = null;
+		// List<UserEntity> listOfEmpleyee = null;
 
-		return listOfEmpleyee = userRepository.findAll();
+		return userRepository.findAll();
+	}
+
+	@Override
+	public String deleteEmployeeById(String id) throws SiddharthException {
+		if (id != null) {
+			Optional<UserEntity> user = userRepository.findById(Long.valueOf(id));
+			if (user.isPresent()) {
+				userRepository.deleteById(Long.parseLong(id));
+				return Constant.SUCCESS;
+
+			}
+
+		}
+		return Constant.ERROR;
+
 	}
 
 }
