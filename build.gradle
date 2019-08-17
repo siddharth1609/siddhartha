@@ -1,8 +1,8 @@
 
 buildscript {
 	ext {
-		springBootVersion = '2.0.3.RELEASE'
-		//springBootVersion = '2.1.5.RELEASE'
+		//springBootVersion = '2.0.3.RELEASE'
+		springBootVersion = '2.1.5.RELEASE'
 		mapstructVersion = '1.3.0.Beta2'
 	}
 	repositories {
@@ -38,9 +38,9 @@ dependencies {
 
 
 
-  // runtime("com.h2database:h2:1.3.176")
+     //runtime("com.h2database:h2:1.3.176")
   // https://mvnrepository.com/artifact/com.h2database/h2
-    testCompile group: 'com.h2database', name: 'h2', version: '1.3.148'
+   testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
   
    compile 'org.springframework.boot:spring-boot-starter-tomcat'
    compile 'org.apache.tomcat.embed:tomcat-embed-core:9.0.19'

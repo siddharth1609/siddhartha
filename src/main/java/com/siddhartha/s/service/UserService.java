@@ -15,4 +15,6 @@ public interface UserService {
 
 	public List<UserEntity> getALlEmployee() throws SiddharthException;
 
+	public String deleteEmployeeById(String id) throws SiddharthException;
+
 }

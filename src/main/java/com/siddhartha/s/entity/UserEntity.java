@@ -7,18 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
-
-@Entity(name = "TBL_EMPLOYEE")
-//@Table(name = "TBL_EMPLOYEE")
+@Entity // (name = "TBL_EMPLOYEE")
+@Table(name = "TBL_EMPLOYEE")
 public class UserEntity implements Serializable {
+
+	private static final long serialVersionUID = -2054386655979281969L;
 
 	// @SequenceGenerator(name = "SEQ", sequenceName = "USER_SEQ")
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ")
+	@SequenceGenerator(name = "SEQ", sequenceName = "EMPLOYEE_SEQ")
 	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 

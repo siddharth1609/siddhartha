@@ -8,20 +8,22 @@ public class Constant {
 	private String ADD = "+";
 	private String DIV = "/";
 	private String MUL = "*";
-	private String SUB = "-";
+	public static final String SUB = "-";
 
 	/*
 	 * User Role Constant
 	 */
 
-	private String ADMIN = "admin";
-	private String USER = "user";
+	public static final String ADMIN = "admin";
+	public static final String USER = "user";
 
 	/*
 	 * Failure/Success Message
 	 */
 
-	private String SUCCESS = "Success";
-	private String ERROR = "Error";
+	public static final String SUCCESS = "Success";
+	public static final String ERROR = "Error";
+
+	public static final String USER_NOT_FOUND = "User Not Found";
 
 }
